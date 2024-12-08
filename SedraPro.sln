@@ -1,0 +1,73 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33205.214
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{274BF2A4-DF03-45E4-800D-719FE9B140FF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01-Domain", "01-Domain", "{A846EE9C-3F25-4579-9D0E-5D2D3E4F9106}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02-Infrastructures", "02-Infrastructures", "{B0E48D7F-4CC3-48FF-94ED-44CB49110659}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03-EndPoints", "03-EndPoints", "{97D9C33D-4700-4002-BF80-6282FC412FB0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{37F2752B-502C-4473-9678-641BA7AFB0D7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{C5E7B9C6-CD68-4C9A-9F69-81B46445A594}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.Domain.Core", "src\01-Domain\Core\App.Domain.Core\App.Domain.Core.csproj", "{FF932FCB-9734-45ED-B353-674CF256BF73}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Domain.ApplicationServices", "src\01-Domain\Services\App.Domain.ApplicationServices\App.Domain.ApplicationServices.csproj", "{FFB8BB4A-9521-4B07-AE0D-04FBE82BEAE9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Infrastructures.Data.Repositories", "src\02-Infrastructures\App.Infrastructures.Data.Repositories\App.Infrastructures.Data.Repositories.csproj", "{1871BEBD-0B85-4DB3-BAFB-3E29481FCF70}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Infrastructures.Db.SqlServer.Ef", "src\02-Infrastructures\App.Infrastructures.Db.SqlServer.Ef\App.Infrastructures.Db.SqlServer.Ef.csproj", "{FAB2FE73-016D-482C-94A3-E5737D5B8FC4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.EndPoints.MVC.SedraPro", "src\03-EndPoints\App.EndPoints.MVC.SedraPro\App.EndPoints.MVC.SedraPro.csproj", "{92B00374-F84C-4E93-889E-6D28A7BAD679}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FF932FCB-9734-45ED-B353-674CF256BF73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF932FCB-9734-45ED-B353-674CF256BF73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF932FCB-9734-45ED-B353-674CF256BF73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF932FCB-9734-45ED-B353-674CF256BF73}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FFB8BB4A-9521-4B07-AE0D-04FBE82BEAE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFB8BB4A-9521-4B07-AE0D-04FBE82BEAE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFB8BB4A-9521-4B07-AE0D-04FBE82BEAE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFB8BB4A-9521-4B07-AE0D-04FBE82BEAE9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1871BEBD-0B85-4DB3-BAFB-3E29481FCF70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1871BEBD-0B85-4DB3-BAFB-3E29481FCF70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1871BEBD-0B85-4DB3-BAFB-3E29481FCF70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1871BEBD-0B85-4DB3-BAFB-3E29481FCF70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FAB2FE73-016D-482C-94A3-E5737D5B8FC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAB2FE73-016D-482C-94A3-E5737D5B8FC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FAB2FE73-016D-482C-94A3-E5737D5B8FC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FAB2FE73-016D-482C-94A3-E5737D5B8FC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92B00374-F84C-4E93-889E-6D28A7BAD679}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92B00374-F84C-4E93-889E-6D28A7BAD679}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92B00374-F84C-4E93-889E-6D28A7BAD679}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92B00374-F84C-4E93-889E-6D28A7BAD679}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A846EE9C-3F25-4579-9D0E-5D2D3E4F9106} = {274BF2A4-DF03-45E4-800D-719FE9B140FF}
+		{B0E48D7F-4CC3-48FF-94ED-44CB49110659} = {274BF2A4-DF03-45E4-800D-719FE9B140FF}
+		{97D9C33D-4700-4002-BF80-6282FC412FB0} = {274BF2A4-DF03-45E4-800D-719FE9B140FF}
+		{37F2752B-502C-4473-9678-641BA7AFB0D7} = {A846EE9C-3F25-4579-9D0E-5D2D3E4F9106}
+		{C5E7B9C6-CD68-4C9A-9F69-81B46445A594} = {A846EE9C-3F25-4579-9D0E-5D2D3E4F9106}
+		{FF932FCB-9734-45ED-B353-674CF256BF73} = {37F2752B-502C-4473-9678-641BA7AFB0D7}
+		{FFB8BB4A-9521-4B07-AE0D-04FBE82BEAE9} = {C5E7B9C6-CD68-4C9A-9F69-81B46445A594}
+		{1871BEBD-0B85-4DB3-BAFB-3E29481FCF70} = {B0E48D7F-4CC3-48FF-94ED-44CB49110659}
+		{FAB2FE73-016D-482C-94A3-E5737D5B8FC4} = {B0E48D7F-4CC3-48FF-94ED-44CB49110659}
+		{92B00374-F84C-4E93-889E-6D28A7BAD679} = {97D9C33D-4700-4002-BF80-6282FC412FB0}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {85718C01-37AC-43BC-9B17-3B0DC018D463}
+	EndGlobalSection
+EndGlobal

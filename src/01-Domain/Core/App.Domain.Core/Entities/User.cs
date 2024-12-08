@@ -12,5 +12,6 @@ namespace App.Domain.Core.Entities
         public int UserId { get; set; }
         public string Name { get; set; }
         public string Family { get; set; }
+        public UserDetails? UserDetails { get; set; }
     }
 }

@@ -11,6 +11,6 @@ namespace App.Domain.Core.Entities
         public int UserDetailsId { get; set; }
         public int Age { get; set; }
         public string Gender { get; set; }
-        public virtual  User? User { get; set; }
+        public   User User { get; set; }
     }
 }

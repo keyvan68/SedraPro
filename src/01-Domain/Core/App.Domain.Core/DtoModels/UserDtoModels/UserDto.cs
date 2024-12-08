@@ -8,8 +8,8 @@ namespace App.Domain.Core.DtoModels.UserDtoModels
 {
     public class UserDto
     {
-        public int UserId { get; set; }
-        public string Name { get; set; }
-        public string Family { get; set; }
+        //public int UserId { get; set; }
+        //public string Name { get; set; }
+        //public string Family { get; set; }
     }
 }

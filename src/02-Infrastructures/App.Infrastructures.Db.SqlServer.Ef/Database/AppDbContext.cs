@@ -31,19 +31,23 @@ namespace App.Infrastructures.Db.SqlServer.Ef.Database
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            
+            
             modelBuilder.Entity<User>(entity =>
             {
                 entity.ToTable("User");
                 entity.Property(e => e.Name).HasMaxLength(50);
                 entity.Property(e => e.Family).HasMaxLength(50);
-                entity.HasOne(d => d.UserDetails).WithOne(p => p.User)
-                    .HasForeignKey<UserDetails>(d => d.UserDetailsId);
+                entity.HasOne<UserDetails>(ad => ad.UserDetails)
+                 .WithOne(s => s.User)
+                 .HasForeignKey<UserDetails>(ad => ad.UserDetailsId);
+
             });
             modelBuilder.Entity<UserDetails>(entity =>
             {
-                entity.ToTable("User");
+                entity.ToTable("UserDetails");
                 entity.Property(e => e.Gender).HasMaxLength(10);
-               
+
 
             });
 

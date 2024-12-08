@@ -1,3 +1,6 @@
+using App.Infrastructures.Db.SqlServer.Ef.Database;
+using Microsoft.EntityFrameworkCore;
+
 namespace App.EndPoints.MVC.SedraPro
 {
     public class Program
@@ -8,6 +11,13 @@ namespace App.EndPoints.MVC.SedraPro
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string  not found.");
+
+
+            builder.Services.AddDbContext<AppDbContext>(options =>
+                options.UseSqlServer(connectionString));
+
 
             var app = builder.Build();
 

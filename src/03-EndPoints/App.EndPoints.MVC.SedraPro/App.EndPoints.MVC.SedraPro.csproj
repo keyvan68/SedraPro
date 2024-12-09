@@ -33,4 +33,8 @@
     <None Include="wwwroot\lib\jquery.unobtrusive-ajax\jquery.unobtrusive-ajax.min.js" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\Image\" />
+  </ItemGroup>
+
 </Project>

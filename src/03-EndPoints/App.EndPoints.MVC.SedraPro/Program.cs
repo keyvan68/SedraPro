@@ -1,3 +1,7 @@
+using App.Domain.ApplicationServices;
+using App.Domain.Core.Contracts.ApplicationService;
+using App.Domain.Core.Contracts.Repository;
+using App.Infrastructures.Data.Repositories.Repositories;
 using App.Infrastructures.Db.SqlServer.Ef.Database;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,6 +21,17 @@ namespace App.EndPoints.MVC.SedraPro
 
             builder.Services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(connectionString));
+
+
+            #region Repository
+            builder.Services.AddScoped<IUserRepository, UserRepository>();
+            builder.Services.AddScoped<IUserDetailsRepositiry, UserDetailsRepositiry>();
+            #endregion Repository
+
+            #region ApplicationServices
+            builder.Services.AddScoped<IUserApplicationService, UserApplicationService>();
+            builder.Services.AddScoped<IUserDetailsApplicationService, UserDetailsApplicationService>();
+            #endregion ApplicationServices
 
 
             var app = builder.Build();

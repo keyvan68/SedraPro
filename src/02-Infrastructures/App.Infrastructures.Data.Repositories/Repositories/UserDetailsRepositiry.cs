@@ -4,6 +4,7 @@ using App.Domain.Core.DtoModels.UserDtoModels;
 using App.Domain.Core.Entities;
 using App.Infrastructures.Db.SqlServer.Ef.Database;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,18 +48,26 @@ namespace App.Infrastructures.Data.Repositories.Repositories
             await _dbContext.SaveChangesAsync(cancellationToken);
         }
 
-       
+
         public async Task<UserDetailsDto> GetById(int UserDetailsID, CancellationToken cancellationToken)
         {
-            var Record = await _dbContext.UserDetails.FirstOrDefaultAsync(x => x.UserDetailsId ==
-           UserDetailsID, cancellationToken);
-            var userDetail = new UserDetailsDto
+            var Record = await _dbContext.UserDetails
+                .FirstOrDefaultAsync(x => x.UserDetailsId == UserDetailsID, cancellationToken);
+            if (Record != null)
             {
-                UserDetailsId = Record.UserDetailsId,
-                Age = Record.Age,
-                Gender = Record.Gender,
-            };
-            return userDetail;
+                var userDetail = new UserDetailsDto
+                {
+                    UserDetailsId = Record.UserDetailsId,
+                    Age = Record.Age,
+                    Gender = Record.Gender,
+                };
+                return userDetail;
+
+            }
+            else
+            {
+                throw new KeyNotFoundException("اطلاعات کاربر مورد نظر پیدا نشد ");
+            }
         }
 
         public async Task Update(UserDetailsDto userDetailsDto, CancellationToken cancellationToken)

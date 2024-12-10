@@ -26,6 +26,7 @@ namespace App.Infrastructures.Data.Repositories.Repositories
         {
             var record = new UserDetails
             {
+                UserDetailsId=userDetailsDto.UserDetailsId,
                 Age = userDetailsDto.Age,
                 Gender = userDetailsDto.Gender
             };

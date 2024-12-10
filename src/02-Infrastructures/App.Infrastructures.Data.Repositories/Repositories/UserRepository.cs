@@ -1,4 +1,5 @@
 ﻿using App.Domain.Core.Contracts.Repository;
+using App.Domain.Core.DtoModels.UserDetailsDtoModels;
 using App.Domain.Core.DtoModels.UserDtoModels;
 using App.Domain.Core.Entities;
 using App.Infrastructures.Db.SqlServer.Ef.Database;
@@ -25,18 +26,27 @@ namespace App.Infrastructures.Data.Repositories.Repositories
             var record = new User
             {
                 Name = userDto.Name,
-                Family=userDto.Family
+                Family=userDto.Family,
+                ImageUrl=userDto.ImageUrl
             };
             await _dbContext.Users.AddAsync(record, cancellationToken);
             await _dbContext.SaveChangesAsync(cancellationToken);
             return record.UserId;
         }
 
-        public async Task Delete(int UserID, CancellationToken cancellationToken)
+        public async Task Delete(int UserID, string rootpat, CancellationToken cancellationToken)
         {
             var Record = await _dbContext.Users.FirstOrDefaultAsync(x => x.UserId == UserID, cancellationToken);
             if (Record != null)
             {
+                if (Record.ImageUrl != null)
+                {
+                    var fullPath = Path.Combine(rootpat, "", Record.ImageUrl);
+                    if (System.IO.File.Exists(fullPath))
+                    {
+                        System.IO.File.Delete(fullPath);
+                    }
+                }
                 _dbContext.Users.Remove(Record);
             }
             else
@@ -52,7 +62,8 @@ namespace App.Infrastructures.Data.Repositories.Repositories
             {
                 UserId=x.UserId,
                 Name = x.Name,
-                Family=x.Family
+                Family=x.Family,
+                ImageUrl=x.ImageUrl
 
             }).ToListAsync((cancellationToken));
             return Record;
@@ -61,13 +72,21 @@ namespace App.Infrastructures.Data.Repositories.Repositories
         public async Task<UserDto> GetById(int UserId, CancellationToken cancellationToken)
         {
 
-            var Record = await _dbContext.Users.FirstOrDefaultAsync(x => x.UserId ==
+            var Record = await _dbContext.Users.Include(x=>x.UserDetails).FirstOrDefaultAsync(x => x.UserId ==
             UserId, cancellationToken);
             var user = new UserDto
             {
                 UserId = Record.UserId,
                 Name = Record.Name,
                 Family = Record.Family,
+                ImageUrl=Record.ImageUrl,
+                UserDetails = new UserDetailsDto 
+                {
+                    UserDetailsId = Record.UserDetails.UserDetailsId,
+                    Gender = Record.UserDetails.Gender,
+                    Age = Record.UserDetails.Age
+                }
+
             };
             return user;
         }
@@ -79,6 +98,7 @@ namespace App.Infrastructures.Data.Repositories.Repositories
 
             Record.Name = userDto.Name;
             Record.Family = userDto.Family;
+            Record.ImageUrl = userDto.ImageUrl;
             await _dbContext.SaveChangesAsync(cancellationToken);
         }
     }

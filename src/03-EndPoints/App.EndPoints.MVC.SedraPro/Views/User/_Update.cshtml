@@ -1,54 +1,66 @@
 ﻿@model App.EndPoints.MVC.SedraPro.Models.ViewModels.UserViewModel
 @{
-    ViewData["Title"] = "Update";
+    ViewData["Title"] = "ویرایش کاربران";
 }
 
-<h1>Update</h1>
 
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Update" method="post" data-ajax="true" data-ajax-method="POST" data-ajax-success="onSuccess" data-ajax-failure="onFailure">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="UserId" value="@Model.UserId" />
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Family" class="control-label"></label>
-                <input asp-for="Family" class="form-control" />
-                <span asp-validation-for="Family" class="text-danger"></span>
-            </div>
-            @*<div class="form-group">
-                <label asp-for="BirthDate" class="control-label"></label>
-                <input asp-for="BirthDate" class="form-control" />
-                <span asp-validation-for="BirthDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Gender" class="control-label"></label>
-                <input asp-for="Gender" class="form-control" />
-                <span asp-validation-for="Gender" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Province" class="control-label"></label>
-                <input asp-for="Province" class="form-control" />
-                <span asp-validation-for="Province" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="City" class="control-label"></label>
-                <input asp-for="City" class="form-control" />
-                <span asp-validation-for="City" class="text-danger"></span>
-            </div>*@
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
+<div>
+    <h4>ویرایش کاربران</h4>
+    <hr />
+    <form class="mt-3" asp-action="Update" method="post" data-ajax="true" data-ajax-method="POST" data-ajax-success="onSuccess" data-ajax-failure="onFailure" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="UserId" value="@Model.UserId" />
+        <div class="form-group mt-3">
+            <label asp-for="Name" class="control-label"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mt-3">
+            <label asp-for="Family" class="control-label"></label>
+            <input asp-for="Family" class="form-control" />
+            <span asp-validation-for="Family" class="text-danger"></span>
+        </div>
+        <div class="form-group mt-3">
+            <label asp-for="Img" class="control-label"></label>
+            <input type="file" asp-for="Img" class="form-control" />
+            <span asp-validation-for="Img" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mt-3">
+            <label asp-for="Age" class="control-label"></label>
+            <input asp-for="Age" class="form-control BirthDate" id="BirthDate" />
+            <span asp-validation-for="Age" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mt-3">
+            <select asp-for="Gender" class="form-select" aria-label="Default select example">
+                <option selected>جنسیت را انتخاب کنید</option>
+                <option value="مرد">مرد</option>
+                <option value="زن">زن</option>
+            </select>
+            @*<label asp-for="Gender" class="control-label"></label>
+            <input asp-for="Gender" class="form-control" />
+            <span asp-validation-for="Gender" class="text-danger"></span>*@
+        </div>
+
+
+        <div class="form-group mt-3">
+            @if (!string.IsNullOrEmpty(Model.ImageUrl))
+            {
+                <img src="@Url.Content($"~/{Model.ImageUrl}")" alt="" style="width: 141px;height: 84px;padding-top: 10px;padding-right: 20px;">
+            }
+            else
+            {
+                <img src="@Url.Content("~/Images/NoPic/nopic.jpg")" alt="تصویر وجود ندارد" style="width: 141px;height: 84px;padding-top: 10px;padding-right: 20px;">
+            }
+        </div>
+        <input type="hidden" asp-for="ImageUrl" value="@Model.ImageUrl" />
+        <div class="form-group mt-3">
+            <input type="submit" value="ایجاد" class="btn btn-primary" />
+        </div>
+    </form>
 </div>
-
-
 
 @section Scripts {
     @{

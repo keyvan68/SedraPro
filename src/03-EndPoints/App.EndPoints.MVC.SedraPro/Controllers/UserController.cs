@@ -1,4 +1,5 @@
 ﻿using App.Domain.Core.Contracts.ApplicationService;
+using App.Domain.Core.DtoModels.UserDetailsDtoModels;
 using App.Domain.Core.DtoModels.UserDtoModels;
 using App.EndPoints.MVC.SedraPro.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -9,11 +10,13 @@ namespace App.EndPoints.MVC.SedraPro.Controllers
     {
         private readonly IUserApplicationService _userApplicationService;
         private readonly IUserDetailsApplicationService _userDetailsApplicationService;
+        private readonly IWebHostEnvironment _hostingEnvironment;
 
-        public UserController(IUserApplicationService userApplicationService, IUserDetailsApplicationService userDetailsApplicationService)
+        public UserController(IUserApplicationService userApplicationService, IUserDetailsApplicationService userDetailsApplicationService, IWebHostEnvironment hostingEnvironment)
         {
             _userApplicationService = userApplicationService;
             _userDetailsApplicationService = userDetailsApplicationService;
+            _hostingEnvironment = hostingEnvironment;
         }
 
         public async Task<IActionResult> Index(CancellationToken cancellationToken)
@@ -24,7 +27,8 @@ namespace App.EndPoints.MVC.SedraPro.Controllers
             {
                 UserId = u.UserId,
                 Name = u.Name,
-                Family = u.Family
+                Family = u.Family,
+                ImageUrl=u.ImageUrl
 
             }).ToList();
             return View(users);
@@ -48,17 +52,25 @@ namespace App.EndPoints.MVC.SedraPro.Controllers
             {
                 UserId = model.UserId,
                 Name = model.Name,
-                Family = model.Family
+                Family = model.Family,
+                UserDetails = new UserDetailsDto
+                {
+                    UserDetailsId = model.UserId,
+                    Age = model.Age,
+                    Gender=model.Gender
+                }
+
+
             };
 
-            await _userApplicationService.Create(dto, cancellationToken);
+            await _userApplicationService.Create(dto,model.Img,_hostingEnvironment.WebRootPath, cancellationToken);
             return Json(new { success = true });
 
 
         }
         public async Task<IActionResult> Delete(int Id, CancellationToken cancellationToken)
         {
-            await _userApplicationService.Delete(Id, cancellationToken);
+            await _userApplicationService.Delete(Id, _hostingEnvironment.WebRootPath, cancellationToken);
             return Json(new { success = true });
         }
         [HttpGet]
@@ -69,7 +81,10 @@ namespace App.EndPoints.MVC.SedraPro.Controllers
             {
                 UserId = Record.UserId,
                 Name = Record.Name,
-                Family = Record.Family
+                Family = Record.Family,
+                ImageUrl=Record.ImageUrl,
+                Age=Record.UserDetails.Age,
+                Gender=Record.UserDetails.Gender
             };
 
 
@@ -84,9 +99,18 @@ namespace App.EndPoints.MVC.SedraPro.Controllers
                 {
                     UserId = model.UserId,
                     Name = model.Name,
-                    Family = model.Family
+                    Family = model.Family,
+                    ImageUrl=model.ImageUrl,
+                    UserDetails = new UserDetailsDto
+                    {
+                        UserDetailsId = model.UserId,
+                        Age = model.Age,
+                        Gender = model.Gender
+                    }
+
+
                 };
-                await _userApplicationService.Update(User, cancellationToken);
+                await _userApplicationService.Update(User,model.Img, _hostingEnvironment.WebRootPath, cancellationToken);
 
             }
             return Json(new { success = true });
@@ -95,13 +119,22 @@ namespace App.EndPoints.MVC.SedraPro.Controllers
         public async Task<IActionResult> UserDetails(int id ,CancellationToken cancellationToken)
         {
             var UserDetail = await _userDetailsApplicationService.GetById(id, cancellationToken);
-            var users =  new UserDeailViewModel
+            var User = await _userApplicationService.GetById(id, cancellationToken);
+            var model = new MultiModelViewModel();
+            model.User = new UserViewModel
+            {
+                Name=User.Name,
+                Family=User.Family,
+                ImageUrl=User.ImageUrl
+
+            };
+            model.UserDeail =  new UserDeailViewModel
             {
                 Age= UserDetail.Age,
                 Gender=UserDetail.Gender
 
             };
-            return View(users);
+            return View(model);
         }
     }
 }

@@ -10,7 +10,7 @@ namespace App.Domain.Core.Contracts.Repository
     public interface IUserRepository
     {
         Task<int> Create(UserDto userDto, CancellationToken cancellationToken);
-        Task Delete(int UserID, CancellationToken cancellationToken);
+        Task Delete(int UserID, string rootpat, CancellationToken cancellationToken);
         Task<List<UserDto>> GetAll(CancellationToken cancellationToken);
         Task<UserDto> GetById(int UserId, CancellationToken cancellationToken);
         Task Update(UserDto userDto, CancellationToken cancellationToken);
